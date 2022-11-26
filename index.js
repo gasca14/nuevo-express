@@ -3,6 +3,7 @@ console.log("juan");
 const express = require("express")
 const cors = require("cors")
 const rutasUsuarios = require('./routes/usuarios.routes')
+const {dbConnection} = require('./database/config')
 
 require("dotenv").config()
 
@@ -19,8 +20,9 @@ app.get("/", function (req, res) {
     res.send("API v1.0");
 });
 
-(()=>{
+(async()=>{
     //funcion que se ejecuta al entrar el archivo index.js
+    await dbConnection()
     const rutaBase = '/api/v1'
     app.use(rutaBase, rutasUsuarios)
 })();
