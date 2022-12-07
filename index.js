@@ -1,8 +1,9 @@
-console.log("juan");
+// console.log("juan");
 
 const express = require("express")
 const cors = require("cors")
 const rutasUsuarios = require('./routes/usuarios.routes')
+const rutasAuth = require('./routes/auth.routes')
 const {dbConnection} = require('./database/config')
 
 require("dotenv").config()
@@ -25,6 +26,9 @@ app.get("/", function (req, res) {
     await dbConnection()
     const rutaBase = '/api/v1'
     app.use(rutaBase, rutasUsuarios)
+    app.use(rutaBase, rutasAuth)
+
+
 })();
 
 app.listen(port, () => console.log(`La aplicacion esta corriendo en el puerto ${port}!`));

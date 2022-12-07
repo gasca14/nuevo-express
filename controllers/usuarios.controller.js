@@ -1,5 +1,6 @@
 const { response, request } = require("express");
 const Usuario = require('../models/Usuario.model')
+const authModel = require('../models/Auth.model')
 
 const usuariosGet = async (req = request, res = response) => {
 
@@ -20,7 +21,8 @@ const usuariosGet = async (req = request, res = response) => {
 const usuariosPost = async (req = request, res = response) => {
     try {
         const body = req.body
-        const usuario = new Usuario(body)
+        let usuario = new Usuario(body)
+        usuario.password =  await authModel.hashPassword(usuario.password)
         await usuario.save()
         res.status(200).json({
             msg: 'Usuario agregado',
