@@ -6,8 +6,10 @@ const hashPassword = async (password) => {
 };
 
 const comparePassword = async (password, hash) => {
-
+    //password: contrasena que el usuario manda en texto plano
+    //hash: contrasena encriptada
     return await bcrypt.compare(password, hash)
+    //retorna true o false
 }
 
 module.exports = {
