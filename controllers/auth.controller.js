@@ -8,10 +8,18 @@ const login = async (req = request, res = response) => {
     const validPassword = await authModel.comparePassword(password, userInformation.password)
 
     if (validPassword === true) {
+        const token = authModel.generarToken(
+            {
+                id: userInformation._id,
+                nombre_completo: `${userInformation.nombre} ${userInformation.apellido}`,
+                correo: userInformation.email,
+                edad: userInformation.edad
+            }
+        )
         res.status(200).json({
             msg: "Entro login",
             is_valid: validPassword,
-            data: "token"
+            data: token
         })
     } else {
         res.status(401).json({

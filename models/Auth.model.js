@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 
 const hashPassword = async (password) => {
     const saltRounds = 10;
@@ -12,7 +14,23 @@ const comparePassword = async (password, hash) => {
     //retorna true o false
 }
 
+const generarToken = (data) => {
+    return jwt.sign(
+        {
+            data
+        },
+        process.env.SECRET_JWT
+    )
+}
+
+const validarToken = () => {
+    return true
+}
+
+
 module.exports = {
     hashPassword,
-    comparePassword
+    comparePassword,
+    generarToken,
+    validarToken
 }
