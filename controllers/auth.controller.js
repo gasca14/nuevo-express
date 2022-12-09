@@ -17,13 +17,13 @@ const login = async (req = request, res = response) => {
             }
         )
         res.status(200).json({
-            msg: "Entro login",
+            msg: "Login correcto",
             is_valid: validPassword,
             data: token
         })
     } else {
         res.status(401).json({
-            msg:"Error, contraseña incorrecta",
+            msg:"Login incorrecto",
             is_valid:validPassword
         })
     }

@@ -1,5 +1,6 @@
-const {Router} = require("express");
+const { Router } = require("express");
 const router = Router();
+const chkToken = require('../middlewares/auth.middleware')
 const {
     usuariosGet,
     usuariosPost,
@@ -9,10 +10,10 @@ const {
 
 
 
-router.get('/usuarios',usuariosGet)
-router.post('/usuarios',usuariosPost)
-router.put('/usuarios/:id',usuariosPut)
-router.delete('/usuarios/:id',usuariosDelete)
-
+router.get('/usuarios', chkToken, usuariosGet)
+router.post('/usuarios', usuariosPost)
+router.put('/usuarios/:id', chkToken, usuariosPut)
+router.delete('/usuarios/:id', chkToken, usuariosDelete)
+//uso de rutas protegidas implementando el uso de middleware chToken
 
 module.exports = router;
