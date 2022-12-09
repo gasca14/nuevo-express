@@ -30,6 +30,15 @@ const login = async (req = request, res = response) => {
 
 }
 
+const validarToken =  async (req = request, res = response) => {
+    const {token} = req.body;
+    res.status(200).json({
+        msg: "Respuesta JWT",
+        data: authModel.validarToken(token)
+    })
+}
+
 module.exports = {
-    login
+    login,
+    validarToken
 }

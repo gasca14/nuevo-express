@@ -19,12 +19,13 @@ const generarToken = (data) => {
         {
             data
         },
-        process.env.SECRET_JWT
+        process.env.SECRET_JWT,
+        { expiresIn: '8h' }
     )
 }
 
-const validarToken = () => {
-    return true
+const validarToken = (token) => {
+    return jwt.verify(token, process.env.SECRET_JWT);
 }
 
 
