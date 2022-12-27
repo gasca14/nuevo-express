@@ -3,8 +3,8 @@ const Usuario = require('../models/Usuario.model');
 const authModel = require('../models/Auth.model')
 
 const login = async (req = request, res = response) => {
-    const { correo, password } = req.body;
-    const userInformation = await Usuario.findOne({ email: correo });
+    const { email, password } = req.body;
+    const userInformation = await Usuario.findOne({ email: email });
     const validPassword = await authModel.comparePassword(password, userInformation.password)
 
     if (validPassword === true) {
@@ -12,7 +12,7 @@ const login = async (req = request, res = response) => {
             {
                 id: userInformation._id,
                 nombre_completo: `${userInformation.nombre} ${userInformation.apellido}`,
-                correo: userInformation.email,
+                email: userInformation.email, 
                 edad: userInformation.edad
             }
         )
