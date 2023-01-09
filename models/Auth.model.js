@@ -28,10 +28,15 @@ const validarToken = (token) => {
     return jwt.verify(token, process.env.SECRET_JWT);
 }
 
+const decodeToken = (token) => {
+    return jwt.decode(token);
+};
+
 
 module.exports = {
     hashPassword,
     comparePassword,
     generarToken,
-    validarToken
+    validarToken,
+    decodeToken
 }

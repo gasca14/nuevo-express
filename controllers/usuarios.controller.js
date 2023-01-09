@@ -58,10 +58,22 @@ const usuariosDelete = async (req = request, res = response) => {
     });
 }
 
+const usuariosGetProfile = async (req = request, res = response) => {
+    let token_raw = req.headers.authorization.split(' ')[1];
+    let token_decode = authModel.decodeToken(token_raw);
+    let perfil = await Usuario.findById(token_decode.data.id);
+    perfil.password = "";
+    res.status(200).json({
+        msg: 'success',
+        data: perfil
+    });
+};
+
 
 module.exports = {
     usuariosGet,
     usuariosPost,
     usuariosPut,
-    usuariosDelete
+    usuariosDelete,
+    usuariosGetProfile
 }

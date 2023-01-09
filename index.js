@@ -5,6 +5,7 @@ const cors = require("cors")
 require("dotenv").config()
 
 const rutasUsuarios = require('./routes/usuarios.routes')
+const rutasProductos = require('./routes/productos.routes')
 const rutasAuth = require('./routes/auth.routes')
 const { dbConnection } = require('./database/config')
 
@@ -29,6 +30,7 @@ app.get("/", function (req, res) {
         const rutaBase = '/api/v1'
         app.use(rutaBase, rutasUsuarios)
         app.use(rutaBase, rutasAuth)
+        app.use(rutaBase, rutasProductos)
 
 
     })();
